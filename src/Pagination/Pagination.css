@@ -1,0 +1,35 @@
+.card-container {
+    display: inline-block;
+    position: relative;
+}
+.page-numbers {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.page-numbers button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f37021;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.page-numbers button:hover {
+    background-color: #d4550e;
+}
+
+.page-numbers button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
