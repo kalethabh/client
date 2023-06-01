@@ -1,38 +1,23 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Card from "../Card/Card";
-import "../Pagination/Pagination.css"
+import "../Pagination/Pagination.css";
+import { useSelector } from "react-redux";
 
 function Pagination() {
+  const pokemons = useSelector((state) => state.pokemons);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonData, setPokemonData] = useState([]);
   const itemsPerPage = 12; // Número de pokémon por página
 
-  // Obtener los datos de los pokémon al cargar el componente
-  useEffect(() => {
-    fetchPokemonData();
-  }, []);
-
-  // Obtener los datos de los pokémon
-  const fetchPokemonData = async () => {
-    try {
-      const response = await axios.get("http://localhost:3001/pokemons/");
-      setPokemonData(response.data);
-    } catch (error) {
-      console.error("Error al obtener los datos de los pokémon:", error);
-    }
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return pokemons.slice(startIndex, endIndex);
   };
 
   // Función para cambiar de página
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-  };
-
-  // Obtener los pokémon para la página actual
-  const getCurrentPageData = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return pokemonData.slice(startIndex, endIndex);
   };
 
   const renderPokemon = () => {
@@ -43,7 +28,7 @@ function Pagination() {
   };
 
   // Obtener el número total de páginas
-  const totalPages = Math.ceil(pokemonData.length / itemsPerPage);
+  const totalPages = Math.ceil(pokemons.length / itemsPerPage);
 
   // Generar los números de las páginas
   const pageNumbers = Array.from(
@@ -52,23 +37,23 @@ function Pagination() {
   );
 
   // Renderizar el componente principal
- return (
-   <div>
-     <div className="page-numbers">
-       {/* Renderizar los números de las páginas como botones */}
-       {pageNumbers.map((pageNumber) => (
-         <button
-           key={pageNumber}
-           onClick={() => handlePageChange(pageNumber)}
-           disabled={pageNumber === currentPage}
-         >
-           {pageNumber}
-         </button>
-       ))}
-     </div>
-     {renderPokemon()}
-   </div>
- );
+  return (
+    <div>
+      <div className="page-numbers">
+        {/* Renderizar los números de las páginas como botones */}
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber)}
+            disabled={pageNumber === currentPage}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
+      {renderPokemon()}
+    </div>
+  );
 }
 
 export default Pagination;

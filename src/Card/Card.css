@@ -24,7 +24,7 @@ html body {
 .card-content {
     font-family: 'VT323', monospace;
         font-weight: bold;
-        color: rgb(1, 1, 1);
+        color: rgb(255, 255, 255);
         text-decoration: none;
         background-color: rgb(214, 1, 22);
         width: 270px;

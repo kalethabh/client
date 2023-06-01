@@ -1,25 +1,24 @@
-import React from 'react'
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getDetailPromise
-} from "../redux/actions/index";
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import "./PokemonDetail.css"
+import { getDetail } from "../redux/actions/index";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./PokemonDetail.css";
 
 const PokemonDetail = (props) => {
-    const dispatch = useDispatch();
-    const myPokemon = useSelector((state) => state.pokeDetail);
+  const dispatch = useDispatch();
+  const myPokemon = useSelector((state) => state.pokeDetail);
 
-    useEffect(() => {
-      dispatch(getDetailPromise(props.match.params.id));
-    }, [dispatch, props.match.params.id]);
+  useEffect(() => {
+    dispatch(getDetail(props.match.params.id));
+  }, [dispatch, props.match.params.id]);
 
   return (
     <div>
       <Link to="/home">
-        <button>Go back</button>
+        <button className="go-back-buttonD">Go back</button>
       </Link>
+        <div className="containerD">
       {myPokemon.length > 0 ? (
         <div className="cardDetail">
           <div>
@@ -43,22 +42,23 @@ const PokemonDetail = (props) => {
                       </p>
                     </div>
                   );
-                })}{" "}
+                })}
               </h3>
             </div>
-            <h5>HP: {myPokemon[0].hp}</h5>
-            <h5>Attack: {myPokemon[0].attack}</h5>
-            <h5>Defense: {myPokemon[0].defense}</h5>
-            <h5>Speed: {myPokemon[0].speed}</h5>
-            <h5>Height: {myPokemon[0].height}</h5>
-            <h5>Weight: {myPokemon[0].weight}</h5>
+            <h5 className="attribute">HP: {myPokemon[0].hp}</h5>
+            <h5 className="attribute">Attack: {myPokemon[0].attack}</h5>
+            <h5 className="attribute">Defense: {myPokemon[0].defense}</h5>
+            <h5 className="attribute">Speed: {myPokemon[0].speed}</h5>
+            <h5 className="attribute">Height: {myPokemon[0].height}</h5>
+            <h5 className="attribute">Weight: {myPokemon[0].weight}</h5>
           </div>
         </div>
       ) : (
         <div></div>
       )}
+      </div>
     </div>
   );
-}
+};
 
-export default PokemonDetail
+export default PokemonDetail;

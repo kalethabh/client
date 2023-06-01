@@ -1,18 +1,26 @@
-.cardDetail {
-    display: grid;
-    justify-content: center;
-    width: 20vw;
-    height: 40vw;
+.go-back-buttonD {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 3.4px solid #000000;
+    border-radius: 7px;
+    margin-top: 40px;
+}
+.containerD {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(200, 100, 0, 0.888);
+    border: 4px solid #000000;
     border-radius: 20px;
-    padding: 10px;
-    background-color: rgba(232, 132, 9, 0.843);
-    box-shadow: 0px 0px 5px 0px rgb(0, 0, 0);
+    margin-top: 2em;
 }
 
 .card-imageDetail {
     position: relative;
-    width: 205px;
-    object-fit: contain;
     margin-top: -50px;
 }
 
@@ -20,16 +28,20 @@
     margin-left: 10px;
     font-family: 'VT323', monospace;
     font-weight: bold;
-    color: rgb(1, 1, 1);
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    background-color: rgb(214, 58, 1);
+    background-color: rgb(214, 1, 22);
     width: 180px;
     text-align: center;
-    border: solid 1px black;
+    /* Agrega esta línea */
+    border: solid 3px black;
     border-radius: 5px;
+    margin: 0 auto;
+    /* Agrega esta línea */
 }
 
 .textDetail {
+    position: relative;
     font-family: 'VT323', monospace;
     font-weight: bold;
     color: rgb(1, 1, 1);
@@ -37,12 +49,56 @@
     background-color: rgb(227, 219, 219);
     width: 115px;
     height: 30px;
-    border: solid 1px black;
+    border: solid 2px black;
     border-radius: 5px;
-    margin-left: 40px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
 }
 
-.id{
+.id {
     margin-bottom: 20px;
     font-weight: bold;
+}
+
+/* Global styles */
+
+h2 {
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    color: rgb(1, 1, 1);
+}
+
+p {
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    color: rgb(1, 1, 1);
+}
+
+img {
+    width: 200px;
+    object-fit: contain;
+}
+
+h3 {
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    color: rgb(1, 1, 1);
+}
+
+.attribute {
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    color: rgb(1, 1, 1);
+    background-color: rgb(227, 219, 219);
+    width: 150px;
+    height: 30px;
+    border: solid 2px black;
+    border-radius: 5px;
+    margin: 10px auto;
+    /* Agrega esta línea para centrar horizontalmente */
+    text-align: center;
+    /* Agrega esta línea para centrar el texto */
+    padding-top: 5px;
+    /* Agrega un espacio superior para separar los atributos */
 }

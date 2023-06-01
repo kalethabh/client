@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { getAlltypes, postPokemon} from "../redux/actions/index";
+import { getAlltypes, postPokemon } from "../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import "../FormPage/FormPage.css"
 
 const FormPage = () => {
   const dispatch = useDispatch();
@@ -110,7 +111,7 @@ const FormPage = () => {
         weight: "",
         types: [],
         img: "",
-        created: true
+        created: true,
       });
       history.push("/home");
     } else {
@@ -130,153 +131,121 @@ const FormPage = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="container">
       <Link to="/home">
-        <button >Go Back</button>
+        <button className="go-back-button">Go Back</button>
       </Link>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <h2>Create a pokemón!</h2>
-        <div >
-          <div >
-            <label >Name:</label>
+      <form className="pokemon-form" onSubmit={handleSubmit}>
+        <h2>Create your Pokémon!</h2>
+        <div className="form-group">
+          <div className="input-group">
+            <label>Name:</label>
             <input
-  
               type="text"
               value={input.name}
               name="name"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="Name"
             />
-            <p >{errors.name}</p>
-            <label >HP:</label>
+            <p className="error-message">{errors.name}</p>
+          </div>
+          <div className="input-group">
+            <label>HP:</label>
             <input
-             
               type="number"
               value={input.hp}
               name="hp"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="HP"
             />
-            <p >{errors.hp}</p>
-            <label >Attack:</label>
+            <p className="error-message">{errors.hp}</p>
+          </div>
+          <div className="input-group">
+            <label>Attack:</label>
             <input
-              
               type="number"
               value={input.attack}
               name="attack"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="Attack"
             />
-            <p >{errors.attack}</p>
-            <label >Defense:</label>
+            <p className="error-message">{errors.attack}</p>
+          </div>
+          <div className="input-group">
+            <label>Defense:</label>
             <input
-              
               type="number"
               value={input.defense}
               name="defense"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="Defense"
             />
-            <p >{errors.defense}</p>
+            <p className="error-message">{errors.defense}</p>
           </div>
-          <div >
-            <label >Speed:</label>
+        </div>
+        <div className="form-group">
+          <div className="input-group">
+            <label>Speed:</label>
             <input
-             
               type="number"
               value={input.speed}
               name="speed"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="Speed"
             />
-            <p >{errors.speed}</p>
-            <label >Height:</label>
+            <p className="error-message">{errors.speed}</p>
+          </div>
+          <div className="input-group">
+            <label>Height:</label>
             <input
-              
               type="number"
               value={input.height}
               name="height"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="Height"
             />
-            <p >{errors.height}</p>
-            <label >Weight:</label>
+            <p className="error-message">{errors.height}</p>
+          </div>
+          <div className="input-group">
+            <label>Weight:</label>
             <input
-           
               type="number"
               value={input.weight}
               name="weight"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="Weight"
             />
-            <p >{errors.weight}</p>
-            <label >Image:</label>
+            <p className="error-message">{errors.weight}</p>
+          </div>
+          <div className="input-group">
+            <label>Image:</label>
             <input
-            
               type="text"
               value={input.img}
               name="img"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              onChange={handleChange}
               placeholder="URL Image..."
             />
-            <p >{errors.img}</p>
+            <p className="error-message">{errors.img}</p>
           </div>
         </div>
-        <div>
-          <select
-           
-            onChange={(e) => {
-              handleSelect(e);
-            }}
-          >
+        <div className="type-selection">
+          <select onChange={handleSelect}>
             <option>Select type</option>
-            {types?.map((e) => {
-              return (
-                <option key={e.id} value={e.name}>
-                  {e.name}
-                </option>
-              );
-            })}
+            {types?.map((type) => (
+              <option key={type.id} value={type.name}>
+                {type.name}
+              </option>
+            ))}
           </select>
-          {
-            input.types.map((e) => {
-              return (
-                <div key={e}>
-                  <p >{e}</p>
-                  <button
-                    
-                    onClick={() => {
-                      handleDelete(e);
-                    }}
-                  >
-                    x
-                  </button>
-                </div>
-              );
-            }) //para poder ver que fui seleccionando
-          }
+          {input.types.map((type) => (
+            <div className="selected-type" key={type}>
+              <p>{type}</p>
+              <button onClick={() => handleDelete(type)}>x</button>
+            </div>
+          ))}
         </div>
-        <button type="submit">
+        <button type="submit" className="create-button">
           Create!
         </button>
       </form>

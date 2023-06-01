@@ -1,23 +1,31 @@
-import React from "react";
-import { useState } from "react";
-import './SearchBar.css'
+import React, { useState } from "react";
+import "./SearchBar.css";
+import { PokemonByName, clearPokemons } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
-    
-    const [name, setName] = useState('');
-    
-    const handleInputChange = (e) => {
-        e.preventDefault();
-        setName(e.target.value);
-        console.log(name);
-    }
+  const [searchPoke, setSearchPoke] = useState("");
+  const dispatch = useDispatch();
 
-    return ( 
-        <div className="search" >
-            <input type="text" placeholder="Buscar..." onChange={e => {handleInputChange(e)}} value={name} className="input" />
-            <button type="submit" className="btn" onSubmit={e => {handleSubmit(e)}}>Buscar</button>   
-        </div>
-     );
-}
- 
+  const handleSearch = () => {
+    dispatch(clearPokemons);
+    dispatch(PokemonByName(searchPoke));
+  };
+
+  return (
+    <div className="search">
+      <input
+        type="text"
+        placeholder="Buscar..."
+        value={searchPoke}
+        className="input"
+        onChange={(e) => setSearchPoke(e.target.value)}
+      />
+      <button type="submit" className="btn" onClick={handleSearch}>
+        Buscar
+      </button>
+    </div>
+  );
+};
+
 export default SearchBar;
