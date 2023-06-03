@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { getAlltypes, postPokemon } from "../redux/actions/index";
+import { getAllTypes, postPokemon } from "../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import "../FormPage/FormPage.css"
 
@@ -127,7 +127,7 @@ const FormPage = () => {
   };
 
   useEffect(() => {
-    dispatch(getAlltypes());
+    dispatch(getAllTypes());
   }, [dispatch]);
 
   return (

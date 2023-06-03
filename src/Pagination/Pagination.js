@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
+import { setCurrentPage } from "../redux/actions/index";
 import "../Pagination/Pagination.css";
-import { useSelector } from "react-redux";
 
 function Pagination() {
+  const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = 12; // Número de pokémon por página
+
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    const totalPagesCount = Math.ceil(pokemons.length / itemsPerPage);
+    setTotalPages(totalPagesCount);
+  }, [pokemons, itemsPerPage]);
 
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -17,7 +25,7 @@ function Pagination() {
 
   // Función para cambiar de página
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    dispatch(setCurrentPage(pageNumber));
   };
 
   const renderPokemon = () => {
@@ -26,9 +34,6 @@ function Pagination() {
       <Card key={pokemon.id} pokemon={pokemon} />
     ));
   };
-
-  // Obtener el número total de páginas
-  const totalPages = Math.ceil(pokemons.length / itemsPerPage);
 
   // Generar los números de las páginas
   const pageNumbers = Array.from(
@@ -39,18 +44,20 @@ function Pagination() {
   // Renderizar el componente principal
   return (
     <div>
-      <div className="page-numbers">
-        {/* Renderizar los números de las páginas como botones */}
-        {pageNumbers.map((pageNumber) => (
-          <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber)}
-            disabled={pageNumber === currentPage}
-          >
-            {pageNumber}
-          </button>
-        ))}
-      </div>
+      {totalPages > 1 && (
+        <div className="page-numbers">
+          {/* Renderizar los números de las páginas como botones */}
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              disabled={pageNumber === currentPage}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
+      )}
       {renderPokemon()}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
-import { PokemonByName, clearPokemons } from "../redux/actions";
+import { PokemonByName } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
@@ -8,7 +8,6 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   const handleSearch = () => {
-    dispatch(clearPokemons);
     dispatch(PokemonByName(searchPoke));
   };
 

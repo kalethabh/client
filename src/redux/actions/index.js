@@ -2,121 +2,140 @@ import axios from "axios";
 
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_ALL_TYPES = "GET_ALL_TYPES";
-
 export const POST_POKEMON = "POST_POKEMON";
 export const GET_DETAILS = "GET_DETAILS";
-
 export const POKEMON_BY_ID = "POKEMON_BY_ID";
 export const POKEMON_BY_NAME = "POKEMON_BY_NAME";
-
 export const CLEAR_POKEMONS = "CLEAR_POKEMONS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-
-
+export const FILTER_BY_TYPES = "FILTER_BY_TYPES";
+export const CLEAR_POKE_DETAIL = "CLEAR_POKE_DETAIL";
+export const FILTER_BY_ATTACK = "FILTER_BY_ATTACK";
+export const SORT_BY_ORDER = "SORT_BY_ORDER";
 
 export const getPokemons = () => {
   return async (dispatch) => {
     try {
-      let url = "http://localhost:3001/pokemons";
-      let json = await axios.get(url);
-      return dispatch({
+      const url = "http://localhost:3001/pokemons";
+      const response = await axios.get(url);
+      dispatch({
         type: GET_POKEMONS,
-        payload: json.data,
+        payload: response.data,
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   };
 };
 
-export const getAlltypes = () => {
+export const getAllTypes = () => {
   return async (dispatch) => {
     try {
-      let url = "http://localhost:3001/types";
-      let json = await axios.get(url);
-      return dispatch({
+      const url = "http://localhost:3001/types";
+      const response = await axios.get(url);
+      dispatch({
         type: GET_ALL_TYPES,
-        payload: json.data,
+        payload: response.data,
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   };
 };
 
-export function getDetail(id) {
-  return function (dispatch) {
+export const getDetail = (id) => {
+  return (dispatch) => {
     axios
       .get(`http://localhost:3001/pokemons/${id}`)
-      .then((res) => res.data)
-      .then((res) =>
+      .then((response) => response.data)
+      .then((data) =>
         dispatch({
           type: GET_DETAILS,
-          payload: res,
+          payload: data,
         })
       )
-      .catch((err) => console.log(err));
+      .catch((error) => console.log(error));
   };
-}
+};
 
-export function postPokemon(payload) {
+export const postPokemon = (payload) => {
   return async () => {
     try {
-      var createPoke = await axios.post(
+      const response = await axios.post(
         "http://localhost:3001/pokemons",
         payload
       );
-      console.log(createPoke);
-      alert("New pokemón is created!");
-      return createPoke;
-    } catch (e) {
-      alert("Pokemon name already exist");
-      console.log(e);
+      console.log(response);
+      alert("New Pokémon is created!");
+      return response;
+    } catch (error) {
+      alert("Pokemon name already exists");
+      console.log(error);
     }
   };
-}
+};
 
-export function PokemonById(id) {
-  return function (dispatch) {
+export const PokemonById = (id) => {
+  return (dispatch) => {
     axios
       .get(`http://localhost:3001/pokemons/${id}`)
-      .then((res) => res.data)
-      .then((res) =>
+      .then((response) => response.data)
+      .then((data) =>
         dispatch({
           type: POKEMON_BY_ID,
-          payload: res,
+          payload: data,
         })
       )
-      .catch((err) => console.log(err));
+      .catch((error) => console.log(error));
   };
-}
+};
 
-export function PokemonByName(searchPoke) {
-  return async (dispatch) => {
-    try {
-      let url = `http://localhost:3001/pokemons/?name=${searchPoke}`;
-      let json = await axios.get(url);
-      return dispatch({
-        type: POKEMON_BY_NAME,
-        payload: json.data,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-}
-
-export function clearPokemons() {
+export const PokemonByName = (searchPoke) => {
   return {
-    type: "CLEAR_POKEMONS",
+    type: POKEMON_BY_NAME,
+    payload: searchPoke,
+  };
+};
+
+
+export const clearPokemons = () => {
+  return {
+    type: CLEAR_POKEMONS,
     payload: [],
   };
-}
+};
 
-export function setCurrentPage(pageNumber){
+export const setCurrentPage = (pageNumber) => {
   return {
-    type: "SET_CURRENT_PAGE",
+    type: SET_CURRENT_PAGE,
     payload: pageNumber,
   };
 };
 
+export const filterByTypes = (selectedType) => {
+  return {
+    type: FILTER_BY_TYPES,
+    payload: selectedType,
+  };
+};
+
+export const clearPokeDetail = () => {
+  return {
+    type: CLEAR_POKE_DETAIL,
+    payload: [],
+  };
+};
+
+export const filterByAttack = (option) => {
+  return {
+    type: FILTER_BY_ATTACK,
+    payload: option,
+  };
+};
+
+export const sortByOrder = (order) => {
+  return {
+    type: SORT_BY_ORDER,
+    payload: order,
+  };
+};
