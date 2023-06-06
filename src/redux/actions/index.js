@@ -76,18 +76,10 @@ export const postPokemon = (payload) => {
 };
 
 export const PokemonById = (id) => {
-  return (dispatch) => {
-    axios
-      .get(`http://localhost:3001/pokemons/${id}`)
-      .then((response) => response.data)
-      .then((data) =>
-        dispatch({
-          type: POKEMON_BY_ID,
-          payload: data,
-        })
-      )
-      .catch((error) => console.log(error));
-  };
+  return {
+    type: POKEMON_BY_ID,
+    payload: id,
+  }
 };
 
 export const PokemonByName = (searchPoke) => {

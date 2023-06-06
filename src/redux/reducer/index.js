@@ -48,9 +48,11 @@ const rootReducer = (state = initialState, action) => {
         createdPokemons: [...state.createdPokemons, action.payload],
       };
     case POKEMON_BY_ID:
+       const copyDetail = [...state.allPokemons];
+      const filteredDetails = copyDetail.filter((p) => p.id === action.payload)
       return {
         ...state,
-        pokemons: action.payload,
+        pokemons: filteredDetails,
       };
     case POKEMON_BY_NAME:
       const nameFiltered = action.payload
