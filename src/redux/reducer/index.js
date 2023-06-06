@@ -53,12 +53,17 @@ const rootReducer = (state = initialState, action) => {
         pokemons: action.payload,
       };
     case POKEMON_BY_NAME:
-      const nameFiltered = state.allPokemons.filter(
-        (p) => p.name === action.payload
-      );
+      const nameFiltered = action.payload
+        ? state.allPokemons.filter((p) => p.name === action.payload)
+        : [];
+      if (!action.payload) {
+        alert("Please enter a Pokémon name.");
+      } else if (nameFiltered.length === 0) {
+        alert("The searched name was not found.");
+      }
       return {
         ...state,
-        pokemons: nameFiltered,
+        pokemons: nameFiltered.length > 0 ? nameFiltered : state.allPokemons,
       };
     case CLEAR_POKEMONS:
       return {
@@ -86,6 +91,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: typeFiltered,
         filteredPokemons: typeFiltered,
+        currentPage: 1,
       };
     case FILTER_BY_ATTACK:
       let copyPokemonsAttack = [...state.pokemons];
@@ -144,19 +150,31 @@ const rootReducer = (state = initialState, action) => {
         pokeDetail: action.payload,
       };
     case FILTER_BY_ORIGIN:
-       let copy = state.allPokemons;
-        let createdFiltered;
-        if (action.payload === "created") {
+      let copy = state.allPokemons;
+      let createdFiltered;
+
+      switch (action.payload) {
+        case "created":
+          if (state.createdPokemons.length === 0) {
+            alert("There are no pokemons created.");
+            return state;
+          }
           createdFiltered = copy.filter((e) => e.createdInBd);
-        } else if (action.payload === "api") {
+          break;
+        case "api":
           createdFiltered = copy.filter((e) => !e.createdInBd);
-        } else {
+          break;
+        default:
           createdFiltered = copy;
-        }
-        return {
-          ...state,
-          pokemons: createdFiltered,
-        };
+          break;
+      }
+
+      return {
+        ...state,
+        pokemons: createdFiltered,
+        currentPage: 1,
+      };
+
     default:
       return state;
   }

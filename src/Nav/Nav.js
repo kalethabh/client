@@ -62,8 +62,8 @@ const Nav = () => {
       <div className="filters-section">
         <h1 className="label">Order: </h1>
         <select className="select" onChange={handleChangeOrder}>
-          <option value="asc">Ascendent</option>
-          <option value="desc">Descendent</option>
+          <option value="asc">Upward</option>
+          <option value="desc">Falling</option>
           <option value="alpha">Alphabetically</option>
         </select>
       </div>
