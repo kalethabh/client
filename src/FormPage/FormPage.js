@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { getAllTypes, postPokemon } from "../redux/actions/index";
+import { getAllTypes, getPokemons, postPokemon } from "../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
-import "../FormPage/FormPage.css"
+import "./FormPage.css";
+import poke from "../img/pokebola.png"
 
 const FormPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const FormPage = () => {
     weight: "",
     types: [],
     img: "",
+    createdInBd: true,
   });
 
   let noEmpty = /\S+/;
@@ -29,34 +31,29 @@ const FormPage = () => {
 
   const validate = (input) => {
     let errors = {};
-    if (
-      !noEmpty.test(input.name) ||
-      !validateName.test(input.name) ||
-      input.name.length < 3
-    ) {
-      errors.name =
-        "Name required. Only string of more than two characters and without numbers";
+    if ( !noEmpty.test(input.name) || !validateName.test(input.name) || input.name.length < 3 ) {
+      errors.name = "Name required. Only string of more than two characters and without numbers";
     }
-    if (!validateNum.test(input.hp) || parseInt(input.hp) < 1) {
-      errors.hp = "Number required. Higher than one";
+    if (!validateNum.test(input.hp) || input.hp < 1) {
+      errors.hp = "Number required. greater than one";
     }
-    if (!validateNum.test(input.attack) || parseInt(input.attack) < 1) {
-      errors.attack = "Number required. Higher than one";
+    if (!validateNum.test(input.attack) || input.attack < 1) {
+      errors.attack = "Number required. greater than one";
     }
-    if (!validateNum.test(input.defense) || parseInt(input.defense) < 1) {
-      errors.defense = "Number required. Higher than one";
+    if (!validateNum.test(input.defense) || input.defense < 1) {
+      errors.defense = "Number required. greater than one";
     }
-    if (!validateNum.test(input.speed) || parseInt(input.speed) < 1) {
-      errors.speed = "Number required. Higher than one";
+    if (!validateNum.test(input.speed) || input.speed < 1) {
+      errors.speed = "Number required. greater than one";
     }
-    if (!validateNum.test(input.height) || parseInt(input.height) < 1) {
-      errors.height = "Number required. Higher than one";
+    if (!validateNum.test(input.height) || input.height < 1) {
+      errors.height = "Number required. greater than one";
     }
-    if (!validateNum.test(input.weight) || parseInt(input.weight) < 1) {
-      errors.weight = "Number required. Higher than one";
+    if (!validateNum.test(input.weight) || input.weight < 1) {
+      errors.weight = "Number required. greater than one";
     }
     if (!validateUrl.test(input.img)) {
-      errors.img = "URL required";
+      errors.img = "URL image required";
     }
 
     return errors;
@@ -100,7 +97,12 @@ const FormPage = () => {
       !errors.weight &&
       !errors.img
     ) {
-      dispatch(postPokemon(input));
+      const updatedInput = {
+        ...input,
+        createdInBd: true,
+      };
+
+      dispatch(postPokemon(updatedInput));
       setInput({
         name: "",
         hp: "",
@@ -111,7 +113,7 @@ const FormPage = () => {
         weight: "",
         types: [],
         img: "",
-        created: true,
+        createdInBd: true,
       });
       history.push("/home");
     } else {
@@ -126,6 +128,10 @@ const FormPage = () => {
     });
   };
 
+  const handleNewPokemon = (e) => {
+    dispatch(getPokemons());
+  };
+
   useEffect(() => {
     dispatch(getAllTypes());
   }, [dispatch]);
@@ -136,7 +142,7 @@ const FormPage = () => {
         <button className="go-back-button">Go Back</button>
       </Link>
       <form className="pokemon-form" onSubmit={handleSubmit}>
-        <h2>Create your Pokémon!</h2>
+        <h2 className="cyp">Create your Pokémon! <img className="pokeImage" src={poke} alt="pokeBola"/></h2>
         <div className="form-group">
           <div className="input-group">
             <label>Name:</label>
@@ -147,7 +153,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="Name"
             />
-            <p className="error-message">{errors.name}</p>
+            {errors.name && <p className="error-message">{errors.name}</p>}
           </div>
           <div className="input-group">
             <label>HP:</label>
@@ -158,7 +164,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="HP"
             />
-            <p className="error-message">{errors.hp}</p>
+            {errors.hp && <p className="error-message">{errors.hp}</p>}
           </div>
           <div className="input-group">
             <label>Attack:</label>
@@ -169,7 +175,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="Attack"
             />
-            <p className="error-message">{errors.attack}</p>
+            {errors.attack && <p className="error-message">{errors.attack}</p>}
           </div>
           <div className="input-group">
             <label>Defense:</label>
@@ -180,7 +186,9 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="Defense"
             />
-            <p className="error-message">{errors.defense}</p>
+            {errors.defense && (
+              <p className="error-message">{errors.defense}</p>
+            )}
           </div>
         </div>
         <div className="form-group">
@@ -193,7 +201,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="Speed"
             />
-            <p className="error-message">{errors.speed}</p>
+            {errors.speed && <p className="error-message">{errors.speed}</p>}
           </div>
           <div className="input-group">
             <label>Height:</label>
@@ -204,7 +212,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="Height"
             />
-            <p className="error-message">{errors.height}</p>
+            {errors.height && <p className="error-message">{errors.height}</p>}
           </div>
           <div className="input-group">
             <label>Weight:</label>
@@ -215,7 +223,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="Weight"
             />
-            <p className="error-message">{errors.weight}</p>
+            {errors.weight && <p className="error-message">{errors.weight}</p>}
           </div>
           <div className="input-group">
             <label>Image:</label>
@@ -226,11 +234,11 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="URL Image..."
             />
-            <p className="error-message">{errors.img}</p>
+            {errors.img && <p className="error-message">{errors.img}</p>}
           </div>
         </div>
-        <div className="type-selection">
-          <select onChange={handleSelect}>
+        <div>
+          <select className="type-selection" onChange={handleSelect}>
             <option>Select type</option>
             {types?.map((type) => (
               <option key={type.id} value={type.name}>
@@ -240,12 +248,18 @@ const FormPage = () => {
           </select>
           {input.types.map((type) => (
             <div className="selected-type" key={type}>
-              <p>{type}</p>
-              <button onClick={() => handleDelete(type)}>x</button>
+              <p className="pTypes">{type}</p>
+              <button className="btnDelete" onClick={() => handleDelete(type)}>
+                x
+              </button>
             </div>
           ))}
         </div>
-        <button type="submit" className="create-button">
+        <button
+          type="submit"
+          className="create-button"
+          onClick={handleNewPokemon}
+        >
           Create!
         </button>
       </form>

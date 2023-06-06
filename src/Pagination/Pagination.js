@@ -17,6 +17,7 @@ function Pagination() {
     setTotalPages(totalPagesCount);
   }, [pokemons, itemsPerPage]);
 
+  // determina el índice de inicio y fin de los pokémon que se deben mostrar en la página.
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -46,7 +47,6 @@ function Pagination() {
     <div>
       {totalPages > 1 && (
         <div className="page-numbers">
-          {/* Renderizar los números de las páginas como botones */}
           {pageNumbers.map((pageNumber) => (
             <button
               key={pageNumber}

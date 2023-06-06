@@ -9,6 +9,8 @@ const PokemonDetail = (props) => {
   const dispatch = useDispatch();
   const myPokemon = useSelector((state) => state.pokeDetail);
 
+console.log(myPokemon);
+
   useEffect(() => {
     dispatch(clearPokeDetail());
     dispatch(getDetail(props.match.params.id));
@@ -17,9 +19,7 @@ const PokemonDetail = (props) => {
   return (
     <div>
       <Link to="/home">
-        <button className="go-back-buttonD">
-          Go back
-        </button>
+        <button className="go-back-buttonD">Go back</button>
       </Link>
       <div className="containerD">
         {myPokemon.length > 0 ? (
@@ -54,6 +54,11 @@ const PokemonDetail = (props) => {
               <h5 className="attribute">Speed: {myPokemon[0].speed}</h5>
               <h5 className="attribute">Height: {myPokemon[0].height}</h5>
               <h5 className="attribute">Weight: {myPokemon[0].weight}</h5>
+              {myPokemon[0].createdInBd ? (
+                <h5 className="attribute">Created: True</h5>
+              ) : (
+                <h5 className="attribute">Created: False</h5>
+              )}
             </div>
           </div>
         ) : (

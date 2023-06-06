@@ -1,0 +1,46 @@
+.landing-page-container {
+    background-color: #f5f5f56f;
+    padding: 20px;
+    border: 4px solid #000000;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 1000px;
+    max-height: 1000px;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+.landing-page-title {
+    font-family: 'Verdana', sans-serif;
+    margin-top: -30px;
+    font-size: 80px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ff0000;
+}
+
+.landing-page-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f2d815;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    border: 3px solid #000000;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.landing-page-button:hover {
+    background-color: #ed8c03;
+}
+
+.logo{
+    margin-top: -50px;
+}
+
+.k{
+    font-family: 'Verdana', sans-serif;
+    margin-top: -40px;
+    color: #ff0000;
+}

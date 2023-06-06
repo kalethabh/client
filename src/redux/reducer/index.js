@@ -11,11 +11,13 @@ import {
   CLEAR_POKE_DETAIL,
   FILTER_BY_ATTACK,
   SORT_BY_ORDER,
+  FILTER_BY_ORIGIN,
 } from "../actions/index";
 
 const initialState = {
   pokemons: [],
   allPokemons: [],
+  createdPokemons: [],
   types: [],
   pokeDetail: [],
   filteredPokemons: [],
@@ -43,6 +45,7 @@ const rootReducer = (state = initialState, action) => {
     case POST_POKEMON:
       return {
         ...state,
+        createdPokemons: [...state.createdPokemons, action.payload],
       };
     case POKEMON_BY_ID:
       return {
@@ -85,25 +88,29 @@ const rootReducer = (state = initialState, action) => {
         filteredPokemons: typeFiltered,
       };
     case FILTER_BY_ATTACK:
-  let copyPokemonsAttack = [...state.pokemons];
-  let sortedPokemonsAttack;
+      let copyPokemonsAttack = [...state.pokemons];
+      let sortedPokemonsAttack;
 
-  switch (action.payload) {
-    case "biggest":
-      sortedPokemonsAttack = copyPokemonsAttack.sort((a, b) => b.attack - a.attack);
-      break;
-    case "minor":
-      sortedPokemonsAttack = copyPokemonsAttack.sort((a, b) => a.attack - b.attack);
-      break;
-    default:
-      sortedPokemonsAttack = copyPokemonsAttack;
-      break;
-  }
+      switch (action.payload) {
+        case "biggest":
+          sortedPokemonsAttack = copyPokemonsAttack.sort(
+            (a, b) => b.attack - a.attack
+          );
+          break;
+        case "minor":
+          sortedPokemonsAttack = copyPokemonsAttack.sort(
+            (a, b) => a.attack - b.attack
+          );
+          break;
+        default:
+          sortedPokemonsAttack = copyPokemonsAttack;
+          break;
+      }
 
-  return {
-    ...state,
-    pokemons: sortedPokemonsAttack,
-  };
+      return {
+        ...state,
+        pokemons: sortedPokemonsAttack,
+      };
 
     case SORT_BY_ORDER:
       let copyPokemons = [...state.pokemons];
@@ -136,6 +143,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokeDetail: action.payload,
       };
+    case FILTER_BY_ORIGIN:
+       let copy = state.allPokemons;
+        let createdFiltered;
+        if (action.payload === "created") {
+          createdFiltered = copy.filter((e) => e.createdInBd);
+        } else if (action.payload === "api") {
+          createdFiltered = copy.filter((e) => !e.createdInBd);
+        } else {
+          createdFiltered = copy;
+        }
+        return {
+          ...state,
+          pokemons: createdFiltered,
+        };
     default:
       return state;
   }

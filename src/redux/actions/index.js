@@ -12,6 +12,7 @@ export const FILTER_BY_TYPES = "FILTER_BY_TYPES";
 export const CLEAR_POKE_DETAIL = "CLEAR_POKE_DETAIL";
 export const FILTER_BY_ATTACK = "FILTER_BY_ATTACK";
 export const SORT_BY_ORDER = "SORT_BY_ORDER";
+export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
 
 export const getPokemons = () => {
   return async (dispatch) => {
@@ -65,7 +66,6 @@ export const postPokemon = (payload) => {
         "http://localhost:3001/pokemons",
         payload
       );
-      console.log(response);
       alert("New Pokémon is created!");
       return response;
     } catch (error) {
@@ -138,4 +138,11 @@ export const sortByOrder = (order) => {
     type: SORT_BY_ORDER,
     payload: order,
   };
+};
+
+export const filterByOrigin = (origin) => {
+  return{
+    type: FILTER_BY_ORIGIN,
+    payload: origin,
+  }
 };

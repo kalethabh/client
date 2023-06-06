@@ -8,6 +8,7 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   const handleSearch = () => {
+    if(searchPoke === "") alert("Name pokemon not found")
     dispatch(PokemonByName(searchPoke));
   };
 

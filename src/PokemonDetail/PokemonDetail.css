@@ -7,16 +7,15 @@
     cursor: pointer;
     border: 3.4px solid #000000;
     border-radius: 7px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .containerD {
-    max-width: 400px;
+    max-width: 390px;
     margin: 0 auto;
     padding: 20px;
     background-color: rgba(200, 100, 0, 0.888);
     border: 4px solid #000000;
     border-radius: 20px;
-    margin-top: 2em;
 }
 
 .card-imageDetail {
@@ -33,11 +32,9 @@
     background-color: rgb(214, 1, 22);
     width: 180px;
     text-align: center;
-    /* Agrega esta línea */
     border: solid 3px black;
     border-radius: 5px;
     margin: 0 auto;
-    /* Agrega esta línea */
 }
 
 .textDetail {
@@ -53,15 +50,13 @@
     border-radius: 5px;
     margin: 0 auto;
     flex-wrap: wrap;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .id {
     margin-bottom: 20px;
     font-weight: bold;
 }
-
-/* Global styles */
 
 h2 {
     font-family: 'VT323', monospace;
@@ -96,9 +91,7 @@ h3 {
     border: solid 2px black;
     border-radius: 5px;
     margin: 10px auto;
-    /* Agrega esta línea para centrar horizontalmente */
     text-align: center;
-    /* Agrega esta línea para centrar el texto */
     padding-top: 5px;
-    /* Agrega un espacio superior para separar los atributos */
+
 }

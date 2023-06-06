@@ -1,3 +1,27 @@
 .pagination{
     margin-top: 8em;
+    padding-left: 10em;
+    padding-right: 10em;
+}
+
+.home-container {
+    position: relative;
+}
+
+.home-button {
+    position: fixed;
+    top: 150px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #f53a3a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.home-button:hover {
+    background-color: #0057b3d2;
 }

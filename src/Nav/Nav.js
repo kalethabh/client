@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getAllTypes, filterByTypes, filterByAttack, sortByOrder} from "../redux/actions/index";
+import {getAllTypes, filterByTypes, filterByAttack, sortByOrder, filterByOrigin} from "../redux/actions/index";
 import SearchBar from "../SearchBar/SearchBar";
 import "./Nav.css";
 import { Link } from "react-router-dom";
@@ -25,11 +25,16 @@ const Nav = () => {
      dispatch(filterByAttack(e.target.value));
    };
 
+    const handleChangeOrigin = (e) => {
+      dispatch(filterByOrigin(e.target.value));
+    };
+
+
   return (
     <nav className="filters-nav">
       <div className="filters-section">
         <label className="label">Origen: </label>
-        <select className="select">
+        <select className="select" onChange={handleChangeOrigin}>
           <option value="all">All</option>
           <option value="api">API</option>
           <option value="created">CREATED</option>
@@ -37,7 +42,7 @@ const Nav = () => {
       </div>
 
       <div className="filters-section">
-        <h1 className="label">Filter: </h1>
+        <h1 className="label">Type: </h1>
         <select
           className="select"
           onChange={(value) => handleChangeType(value)}
@@ -74,7 +79,9 @@ const Nav = () => {
       <Link to="/createPokemon">
         <button className="boton">Create</button>
       </Link>
-      <SearchBar />
+      <div className="search">
+        <SearchBar />
+      </div>
     </nav>
   );
 };
