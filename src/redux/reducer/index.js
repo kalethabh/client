@@ -15,6 +15,7 @@ import {
 } from "../actions/index";
 
 const initialState = {
+  isLoading: false, // Agrega el estado isLoading
   pokemons: [],
   allPokemons: [],
   createdPokemons: [],
@@ -29,6 +30,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_POKEMONS:
       return {
         ...state,
+        isLoading: false, // Cambia el estado a false cuando los pokemons se han cargado
         pokemons: action.payload,
         allPokemons: action.payload,
       };
@@ -48,8 +50,8 @@ const rootReducer = (state = initialState, action) => {
         createdPokemons: [...state.createdPokemons, action.payload],
       };
     case POKEMON_BY_ID:
-       const copyDetail = [...state.allPokemons];
-      const filteredDetails = copyDetail.filter((p) => p.id === action.payload)
+      const copyDetail = [...state.allPokemons];
+      const filteredDetails = copyDetail.filter((p) => p.id === action.payload);
       return {
         ...state,
         pokemons: filteredDetails,
