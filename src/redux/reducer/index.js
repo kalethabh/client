@@ -15,7 +15,6 @@ import {
 } from "../actions/index";
 
 const initialState = {
-  isLoading: false, // Agrega el estado isLoading
   pokemons: [],
   allPokemons: [],
   createdPokemons: [],
@@ -30,7 +29,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_POKEMONS:
       return {
         ...state,
-        isLoading: false, // Cambia el estado a false cuando los pokemons se han cargado
+        isLoading: false,
         pokemons: action.payload,
         allPokemons: action.payload,
       };
