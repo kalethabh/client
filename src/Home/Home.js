@@ -4,6 +4,7 @@ import Pagination from "../Pagination/Pagination";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const isPokemonsLoaded = useSelector((state) => state.isPokemonsLoaded);
