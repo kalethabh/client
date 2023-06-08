@@ -8,7 +8,7 @@ import logo from "../img/ISOLOGO_HENRY_BLACK.png";
 export default function LandingPage() {
   const dispatch = useDispatch();
   const listenerPokemons = useSelector((state) => state.allPokemons);
-  const [isLoading, setIsLoading] = useState(true); // New isLoading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -24,7 +24,7 @@ export default function LandingPage() {
       <h1 className="landing-page-title">Pokemon API</h1>
       <img src={logo} alt="logo" className="logo" />
       <h2 className="k">kalethabh</h2>
-      {isLoading ? ( // Conditional rendering based on isLoading state
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <Link to="/home">
