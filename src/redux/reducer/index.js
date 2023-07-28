@@ -29,7 +29,6 @@ const rootReducer = (state = initialState, action) => {
     case GET_POKEMONS:
       return {
         ...state,
-        isLoading: false,
         pokemons: action.payload,
         allPokemons: action.payload,
       };
@@ -48,6 +47,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         createdPokemons: [...state.createdPokemons, action.payload],
       };
+
     case POKEMON_BY_ID:
       const copyDetail = [...state.allPokemons];
       const filteredDetails = copyDetail.filter((p) => p.id === action.payload);
@@ -176,6 +176,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: createdFiltered,
         currentPage: 1,
+      };
+    case SORT_CATEGORIES:
+      const selectedCategory = action.payload;
+      let filteredGames = [];
+
+      if (selectedCategory === "all") {
+        filteredGames = state.allGames;
+      } else {
+        filteredGames = state.allGames.filter(
+          (game) => game.category === selectedCategory
+        );
+      }
+
+      return {
+        ...state,
+        allGames: filteredGames,
       };
 
     default:

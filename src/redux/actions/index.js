@@ -60,16 +60,20 @@ export const getDetail = (id) => {
 };
 
 export const postPokemon = (payload) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       const response = await axios.post(
         "http://localhost:3001/pokemons",
         payload
       );
-      alert("New Pokémon is created!");
+      dispatch({
+        type: POST_POKEMON,
+        payload
+      });
+      alert("¡Nuevo Pokémon creado!");
       return response;
     } catch (error) {
-      alert("Pokemon name already exists");
+      alert("El nombre del Pokémon ya existe");
       console.log(error);
     }
   };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
-import { PokemonById, PokemonByName } from "../redux/actions";
+import { PokemonByName } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
@@ -8,7 +8,6 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   const handleSearch = () => {
-    if(typeof(searchPoke) === "number") dispatch(PokemonById)
     dispatch(PokemonByName(searchPoke));
   };
 
