@@ -17,7 +17,7 @@ export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
 export const getPokemons = () => {
   return async (dispatch) => {
     try {
-      const url = "http://localhost:3001/pokemons";
+      const url = "http://localhost:5475/pokemons";
       const response = await axios.get(url);
       dispatch({
         type: GET_POKEMONS,
@@ -32,7 +32,7 @@ export const getPokemons = () => {
 export const getAllTypes = () => {
   return async (dispatch) => {
     try {
-      const url = "http://localhost:3001/types";
+      const url = "http://localhost:5475/types";
       const response = await axios.get(url);
       dispatch({
         type: GET_ALL_TYPES,
@@ -47,7 +47,7 @@ export const getAllTypes = () => {
 export const getDetail = (id) => {
   return (dispatch) => {
     axios
-      .get(`http://localhost:3001/pokemons/${id}`)
+      .get(`http://localhost:5475/pokemons/${id}`)
       .then((response) => response.data)
       .then((data) =>
         dispatch({
@@ -63,7 +63,7 @@ export const postPokemon = (payload) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/pokemons",
+        "http://localhost:5475/pokemons",
         payload
       );
       dispatch({

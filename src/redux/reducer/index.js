@@ -177,22 +177,7 @@ const rootReducer = (state = initialState, action) => {
         pokemons: createdFiltered,
         currentPage: 1,
       };
-    case SORT_CATEGORIES:
-      const selectedCategory = action.payload;
-      let filteredGames = [];
 
-      if (selectedCategory === "all") {
-        filteredGames = state.allGames;
-      } else {
-        filteredGames = state.allGames.filter(
-          (game) => game.category === selectedCategory
-        );
-      }
-
-      return {
-        ...state,
-        allGames: filteredGames,
-      };
 
     default:
       return state;
